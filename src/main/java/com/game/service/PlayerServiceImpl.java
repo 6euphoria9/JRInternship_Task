@@ -91,11 +91,11 @@ public class PlayerServiceImpl implements PlayerService {
 
         for (Map.Entry<String, Object> element : filters.entrySet()) {
             if (element.getKey().equals("name")) {
-                streamPlayer = streamPlayer.filter(dto -> dto.getName().contains((String) element.getValue()));
+                streamPlayer = streamPlayer.filter(dto -> dto.getName().toLowerCase().contains(String.valueOf(element.getValue()).toLowerCase()));
                 continue;
             }
             if (element.getKey().equals("title")) {
-                streamPlayer = streamPlayer.filter(dto -> dto.getTitle().contains((String) element.getValue()));
+                streamPlayer = streamPlayer.filter(dto -> dto.getTitle().toLowerCase().contains(String.valueOf(element.getValue()).toLowerCase()));
                 continue;
             }
             if (element.getKey().equals("race")) {
