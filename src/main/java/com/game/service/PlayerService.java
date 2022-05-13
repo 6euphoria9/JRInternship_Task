@@ -5,11 +5,11 @@ import com.game.http.*;
 import java.util.List;
 
 public interface PlayerService {
-    public List<FetchAllPlayersResponse> findAllRegistered(FetchAllPlayersRequest fetchAllPlayersRequest);
-    public Integer getPlayersCount(GetPlayersCountRequest getPlayersCountRequest);
-    public CreatePlayerResponse createPlayer(CreatePlayerRequest createPlayerRequest);
-    public FetchPlayerByIdResponse getPlayerById(FetchPlayerByIdRequest fetchPlayerByIdRequest);
-    public UpdatePlayerResponse updatePlayer(UpdatePlayerRequest updatePlayerRequest);
-    public void deletePlayerById(DeleteByIdRequest deleteByIdRequest);
+    List<FetchAllPlayersResponse> findAllRegistered(FetchAllPlayersRequest fetchAllPlayersRequest);
+    Integer getPlayersCount(GetPlayersCountRequest getPlayersCountRequest);
+    CreatePlayerResponse createPlayer(CreatePlayerRequest createPlayerRequest);
+    FetchPlayerByIdResponse getPlayerById(FetchPlayerByIdRequest fetchPlayerByIdRequest);
+    UpdatePlayerResponse updatePlayer(UpdatePlayerRequest updatePlayerRequest);
+    void deletePlayerById(DeleteByIdRequest deleteByIdRequest);
 
 }

@@ -20,6 +20,9 @@ public class FetchAllPlayersRequest {
      Integer pageNumber;
      Integer pageSize;
 
+     public FetchAllPlayersRequest() {
+     }
+
      public FetchAllPlayersRequest(String name, String title, Race race, Profession profession, Long after, Long before, Boolean banned, Integer minExperience, Integer maxExperience, Integer minLevel, Integer maxLevel, PlayerOrder order, Integer pageNumber, Integer pageSize) {
           this.name = name;
           this.title = title;

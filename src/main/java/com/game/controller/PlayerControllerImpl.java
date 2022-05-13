@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/rest/players")
 public class PlayerControllerImpl implements PlayerController {
-    org.slf4j.Logger log = LoggerFactory.getLogger(PlayerControllerImpl.class);
     PlayerService service;
 
 
@@ -30,66 +29,17 @@ public class PlayerControllerImpl implements PlayerController {
     }
 
     @Override
-    public ResponseEntity<Object> fetchAll(String name,
-                                                  String title,
-                                                  Race race,
-                                                  Profession profession,
-                                                  Long after,
-                                                  Long before,
-                                                  Boolean banned,
-                                                  Integer minExperience,
-                                                  Integer maxExperience,
-                                                  Integer minLevel,
-                                                  Integer maxLevel,
-                                                  PlayerOrder order,
-                                                  Integer pageNumber,
-                                                  Integer pageSize) {
-        FetchAllPlayersRequest request = new FetchAllPlayersRequest(name,
-                title,
-                race,
-                profession,
-                after,
-                before,
-                banned,
-                minExperience,
-                maxExperience,
-                minLevel,
-                maxLevel,
-                order,
-                pageNumber,
-                pageSize);
-
-        return new ResponseEntity<>(service.findAllRegistered(request), HttpStatus.OK);
+    public ResponseEntity<Object> fetchAll(FetchAllPlayersRequest requestBody) {
+        return new ResponseEntity<>(service.findAllRegistered(requestBody), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Object>  getCount(String name,
-                            String title,
-                            Race race,
-                            Profession profession,
-                            Long after,
-                            Long before,
-                            Boolean banned,
-                            Integer minExperience,
-                            Integer maxExperience,
-                            Integer minLevel,
-                            Integer maxLevel) {
-        GetPlayersCountRequest request = new GetPlayersCountRequest(name,
-                title,
-                race,
-                profession,
-                after,
-                before,
-                banned,
-                minExperience,
-                maxExperience,
-                minLevel,
-                maxLevel);
-        return new ResponseEntity<>(service.getPlayersCount(request), HttpStatus.OK);
+    public ResponseEntity<Object>  getCount(GetPlayersCountRequest requestBody) {
+        return new ResponseEntity<>(service.getPlayersCount(requestBody), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Object> createPlayer(CreatePlayerRequest requestBody, HttpServletRequest request) {
+    public ResponseEntity<Object> createPlayer(CreatePlayerRequest requestBody) {
         return new ResponseEntity<>(service.createPlayer(requestBody), HttpStatus.OK);
     }
 
@@ -101,38 +51,15 @@ public class PlayerControllerImpl implements PlayerController {
     }
 
     @Override
-    public ResponseEntity<Object> updatePlayer(Long id, UpdatePlayerRequest requestBody, HttpServletRequest request) {
+    public ResponseEntity<Object> updatePlayer(Long id, UpdatePlayerRequest requestBody) {
         requestBody.setId(id);
         return new ResponseEntity<>(service.updatePlayer(requestBody), HttpStatus.OK);
     }
 
-
-    //    @Override
-//    public ResponseEntity<Object> updatePlayer(Long id,
-//                                               String name,
-//                                               String title,
-//                                               Race race,
-//                                               Profession profession,
-//                                               Long birthday,
-//                                               Boolean banned,
-//                                               Integer experience) {
-//        UpdatePlayerRequest request = new UpdatePlayerRequest(id,
-//                name,
-//                title,
-//                race,
-//                profession,
-//                birthday,
-//                banned,
-//                experience);
-//
-//        return new ResponseEntity<>(service.updatePlayer(request), HttpStatus.OK);
-//    }
-
     @Override
     public ResponseEntity<Object> deletePlayer(Long id) {
-        log.info("Delete player");
         DeleteByIdRequest request = new DeleteByIdRequest(id);
         service.deletePlayerById(request);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

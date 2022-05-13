@@ -1,6 +1,7 @@
 package com.game.service;
 
 
+import com.game.controller.PlayerOrder;
 import com.game.entity.Player;
 import com.game.http.*;
 import com.game.repository.PlayerRepository;
@@ -66,9 +67,6 @@ public class PlayerServiceImpl implements PlayerService {
         }
         if (fetchAllPlayersRequest.getBanned() != null) {
             filters.put("banned", fetchAllPlayersRequest.getBanned());
-        }
-        if (fetchAllPlayersRequest.getOrder() != null) {
-            filters.put("order", fetchAllPlayersRequest.getOrder());
         }
         if (fetchAllPlayersRequest.getMinLevel() != null) {
             filters.put("minLevel", fetchAllPlayersRequest.getMinLevel());
@@ -163,7 +161,6 @@ public class PlayerServiceImpl implements PlayerService {
                     break;
             }
         }
-
 
         if (fetchAllPlayersRequest.getPageSize() == null && fetchAllPlayersRequest.getPageNumber() == null) {
             startPlayerList = doPagination(startPlayerList, 3, 0);
